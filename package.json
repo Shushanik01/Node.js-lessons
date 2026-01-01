@@ -1,0 +1,23 @@
+{
+  "name": "express-js",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shushanik01/Node.js-lessons.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shushanik01/Node.js-lessons/issues"
+  },
+  "homepage": "https://github.com/Shushanik01/Node.js-lessons#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
