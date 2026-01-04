@@ -1,9 +1,15 @@
 const express = require('express');
 const session = require('express-session');
-
-
+const mongoose = require('mongoose');
+const hashedPassword = require('./mongoose/bcrypt.js')
+const userRoutes = require('../routes/users.js')
+const MongoStore = require('connect-mongo')
 const app = express();
 app.use(express.json());
+
+app.use(userRoutes)
+const mongoURI = 'mongodb+srv://shushanikarakl62_db_user:shushanik2001@cluster0.8hkju2f.mongodb.net/'
+mongoose.connect(mongoURI)
 
 app.use(session({
   secret: 'Shushanik the dev',
@@ -11,8 +17,10 @@ app.use(session({
   resave: false,
   cookie: {
     maxAge: 60000 * 60 
-  }
-  
+  },
+  store: MongoStore.create({
+    client: mongoose.connection.getClient()
+  })
 }));
 const passport = require('./local-strategy.js')
 app.use(passport.initialize());
@@ -137,7 +145,7 @@ app.get('/api/products', (req, resp) => {
 
 app.post('/api/users', (req, resp) => {
   const { body } = req;
-  
+//   body.passport = hashedPassword(passport)
   const newUser = {
     id: MockUsers[MockUsers.length - 1].id + 1,
     ...body
