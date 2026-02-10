@@ -34,4 +34,7 @@ async function searchQueries() {
     } finally {
         await mongoose.connection.close()
     }
-} 
+} ;
+
+
+

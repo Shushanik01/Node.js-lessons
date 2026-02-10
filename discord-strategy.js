@@ -17,5 +17,14 @@ passport.use(new Strategy({
          const newSavedUser = await newUser.save();
          done(null, newSavedUser)
     }
-   
-}))
+   done(null, findUser)
+}));
+
+passport.serializeUser((user, done)=>{
+    done(null, user.id)
+});
+
+passport.deserializeUser(async(id, done)=>{
+    const user = await discordUser.findById(id);
+    done(null, user)
+})
