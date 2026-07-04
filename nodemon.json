@@ -1,0 +1,5 @@
+{
+  "watch": ["app.js", "fileSystem.js"],
+  "ext": "js",
+  "ignore": ["*.txt", "*.svg", "node_modules"]
+}
