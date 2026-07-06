@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+// import fs from 'node:fs';
 // import express from 'express';
 // import generateName  from 'sillyname';
 // import superheroes from 'superheroes';
@@ -134,3 +134,26 @@ import fs from 'node:fs';
 // app.listen(port, ()=>{
 //     console.log('the app is running on port' + port);  
 // })
+
+//learning express-validator
+import { check, validationResult } from 'express-validator';
+import express from 'express';
+import { urlencoded } from 'body-parser';
+
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/signup', [
+    check("username").notEmpty().trim().isLength({ min: 3 })
+        .withMessage('The username should contain at least 3 characters'),
+    check('Email').isEmail().normalizeEmail().withMessage('Invalid mail address'),
+    check('password').isLength({ min: 8 }).withMessage('The password must be at least 8 characters')
+],
+    (req, res) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+        res.send('Validation passed successfully!')
+    })

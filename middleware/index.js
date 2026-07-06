@@ -1,3 +1,7 @@
+import {express} from 'express';
+
+const app = express();
+
 //Authentication Middleware
 function auth(req, res, next) {
 
@@ -27,4 +31,13 @@ async function getAuthorbyId(req, res) {
         console.log(`Error retriving author`, error);
         res.status(500).send('Internal server error')
     }
-}
+};
+
+//middleware for handling all errors
+app.use((err, req, res, next)=>{
+
+        console.error(err)
+        res.status(500).send('Internal server error', err);
+
+        next()
+});
