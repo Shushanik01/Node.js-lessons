@@ -1,4 +1,4 @@
-import userStorage from ''
+import userStorage from "../storages/usersStorage";
 
 export const userListGet = (req, res) => {
     res.render('index', {
